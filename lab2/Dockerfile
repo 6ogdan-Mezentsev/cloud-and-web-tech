@@ -1,19 +1,19 @@
-# ---------------- BAD-PRACTICE
-# 1. Используем слишком тяжёлый базовый образ Ubuntu
-FROM ubuntu:latest  
+# # ---------------- BAD-PRACTICE
+# # 1. Используем слишком тяжёлый базовый образ Ubuntu
+# FROM ubuntu:latest  
 
-# 2. Устанавливаем все пакеты вручную и не чистим кеш apt
-RUN apt update && apt install -y nodejs npm  
+# # 2. Устанавливаем все пакеты вручную и не чистим кеш apt
+# RUN apt update && apt install -y nodejs npm  
 
-WORKDIR /lab2
+# WORKDIR /lab2
 
-COPY . .
+# COPY . .
 
-# 3. Устанавливаем зависимости от root-пользователя
-RUN npm install  
+# # 3. Устанавливаем зависимости от root-пользователя
+# RUN npm install  
 
-# 4. Не указываем EXPOSE (порт, который слушает контейнер)
-CMD ["node", "index.js"]
+# # 4. Не указываем EXPOSE (порт, который слушает контейнер)
+# CMD ["node", "index.js"]
 
 
 # ---------------- BEST-PRACTICE
