@@ -173,8 +173,25 @@ networks:
     driver: bridge
 ```
 
+## Результат
+
+1. Собираем образ по правилам из нашего Dockerfile:
+
+<img width="785" height="352" alt="image" src="https://github.com/user-attachments/assets/fbfcf9cf-22b8-4a82-9b16-9333be107d19" />
+
+2. Запускаем контейнер на основове собранного образа
+
+<img width="534" height="30" alt="image" src="https://github.com/user-attachments/assets/f59f21dc-b02e-4f3c-9f27-1c17fbe1f10d" />
+
+3. Проверяем работу ручки
+
+<img width="701" height="115" alt="image" src="https://github.com/user-attachments/assets/0dd27234-e387-42b9-a758-c0df8d947f61" />
+
+В результате получаем рабочий api-сервер c одним эндпоинтом, который запущен в docker-контейнере, созданном на основе docker-образа.
+
 ## Вывод
 Рассмотренные практики(best practices) позволяют создавать лёгкие и безопасные образы, эффективно управлять данными контейнеров, обеспечивать их взаимодействие через сеть и защищать конфиденциальную информацию.
+
 
 
 
