@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>Pr2</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <h1>Pr2</h1>
+    <p>Ручка API: <code>/api/hello</code></p>
+    <button id="btn">Запросить /api/hello</button>
+    <p id="out"></p>
+    <script>
+      document.getElementById("btn").onclick = async () => {
+        const r = await fetch("express/api/hello");
+        document.getElementById("out").textContent = await r.text();
+      };
+    </script>
+  </body>
+</html>
