@@ -1,0 +1,48 @@
+# ---------------- BAD-PRACTICE
+# version: "3.9"
+
+# services:
+# express:
+#   build:
+#     # 1. Широкий build-context
+#     context: .
+#     dockerfile: pr1/Dockerfile
+
+#   # 2. Теряем сетевую изоляцию и контроль портов
+#   network_mode: host
+
+# static:
+#   # 3. Неприкреплённый тег
+#   image: nginx:latest
+#   # 4. Опять же без изоляци
+#   network_mode: host
+#   volumes:
+#     - ./pr2:/usr/share/nginx/html:ro
+
+# ---------------- BEST-PRACTICE
+version: "3.9"
+
+services:
+  express:
+    build:
+      context: ./pr1
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    networks:
+      - express_net
+
+  static:
+    image: nginx:1.25-alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./pr2:/usr/share/nginx/html
+    networks:
+      - static_net
+
+networks:
+  express_net:
+    driver: bridge
+  static_net:
+    driver: bridge
