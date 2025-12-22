@@ -1,0 +1,62 @@
+name: Bad CI/CD
+
+on:
+  push:
+    branches:
+      - "*"   # BAD PRACTICE: деплой запускается на любой push, включая feature-ветки и тестовые коммиты
+
+jobs:
+  build_test_deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      # BAD PRACTICE: секретные переменные хранятся прямо в YAML файле
+      DOCKERHUB_USER: your_dockerhub_login
+      DOCKERHUB_PASSWORD: your_dockerhub_password
+      IMAGE_NAME: your_dockerhub_login/express-lab2:latest
+
+      # BAD PRACTICE: использование root-пользователя и пароля для SSH
+      SSH_HOST: 1.2.3.4
+      SSH_USER: root
+      SSH_PASSWORD: rootpassword
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          # BAD PRACTICE: сборка образа без кэширования и без фиксации версии тега
+          docker build -t $IMAGE_NAME ./lab2/pr1
+
+      - name: Login to Docker Hub
+        run: |
+          # BAD PRACTICE: использование логина и пароля вместо access token
+          docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+
+      - name: Push image
+        run: |
+          docker push $IMAGE_NAME
+
+        # BAD PRACTICE: тест не проверяет HTTP статус и не валидирует ответ
+        # BAD PRACTICE: отсутствие полноценного тестового шага
+      - name: Run container for test
+        run: |
+          docker run -d -p 8001:8001 --name test_container $IMAGE_NAME
+          sleep 5
+          curl http://localhost:8001/api/hello
+          docker rm -f test_container
+
+        # BAD PRACTICE: установка пакетов прямо в pipeline
+        # BAD PRACTICE: использование sshpass и пароля для SSH
+      - name: Deploy to server
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
+
+          sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST << EOF
+            docker pull $IMAGE_NAME
+            docker stop express || true
+            docker rm express || true
+            docker run -d --name express -p 8001:8001 $IMAGE_NAME
+          EOF
