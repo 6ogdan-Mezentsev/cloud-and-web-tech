@@ -88,10 +88,7 @@ jobs:
           VPS_USER: ${{ secrets.VPS_USER }}
           VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
         run: |
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/express-lab2:latest
-            docker stop express || true
-            docker rm express || true
-            docker run -d \
-              --name express \
-              -p 8001:8001 \
-              ${{ secrets.DOCKERHUB_USERNAME }}/_
+          sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST bash -s << 'EOF'
+            docker compose -f docker-compose.prod.yml down -v wordpress
+            docker-compose -f docker-compose.prod.yml pull
+            docker-compose -f docker-compose.prod.yml up -d
