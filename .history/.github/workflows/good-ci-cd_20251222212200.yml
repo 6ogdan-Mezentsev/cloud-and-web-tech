@@ -88,7 +88,7 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
         run: |
-            sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST bash -s << 'EOF'
+            sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST bash -s << 'EOF'
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/express-lab2:latest
             docker stop express || true
             docker rm express || true
