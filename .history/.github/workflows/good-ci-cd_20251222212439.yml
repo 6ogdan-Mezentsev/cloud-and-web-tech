@@ -95,4 +95,4 @@ jobs:
             docker run -d \
               --name express \
               -p 8001:8001 \
-              ${{ secrets.DOCKERHUB_USERNAME }}/express-lab2:latest
+              ${{ secrets.DOCKERHUB_USERNAME }}/_
