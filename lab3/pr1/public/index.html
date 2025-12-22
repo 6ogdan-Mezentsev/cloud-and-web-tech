@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>DevOps Lab</title>
+  </head>
+  <body>
+    <h1>DevOps Lab</h1>
+
+    <button id="btn">Вызвать /api/hello</button>
+    <pre id="out"></pre>
+
+    <script>
+      document.getElementById("btn").onclick = async () => {
+        const r = await fetch("/api/hello");
+        const data = await r.json();
+        document.getElementById("out").textContent = JSON.stringify(data, null, 2);
+      };
+    </script>
+  </body>
+</html>
