@@ -67,21 +67,6 @@ jobs:
     needs: test   # BEST PRACTICE: деплой возможен только после успешных тестов
 
     steps:
-      # - name: Deploy via SSH
-      #   uses: appleboy/ssh-action@v1.0.3
-      #   with:
-      #     # BEST PRACTICE: аутентификация по SSH-ключу вместо пароля
-      #     host: ${{ secrets.SSH_HOST }}
-      #     username: ${{ secrets.SSH_USER }}
-      #     key: ${{ secrets.SSH_PRIVATE_KEY }}
-      #     script: |
-      #       docker pull ${{ secrets.DOCKERHUB_USERNAME }}/express-lab2:latest
-      #       docker stop express || true
-      #       docker rm express || true
-      #       docker run -d \
-      #         --name express \
-      #         -p 8001:8001 \
-      #         ${{ secrets.DOCKERHUB_USERNAME }}/_
       - name: Deploy to VPS
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}

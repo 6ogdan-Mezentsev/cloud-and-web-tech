@@ -14,8 +14,6 @@ jobs:
       DOCKERHUB_USER: your_dockerhub_login
       DOCKERHUB_PASSWORD: your_dockerhub_password
       IMAGE_NAME: your_dockerhub_login/express-lab2:latest
-
-      # BAD PRACTICE: использование root-пользователя и пароля для SSH
       SSH_HOST: 1.2.3.4
       SSH_USER: root
       SSH_PASSWORD: rootpassword
@@ -48,7 +46,6 @@ jobs:
           docker rm -f test_container
 
         # BAD PRACTICE: установка пакетов прямо в pipeline
-        # BAD PRACTICE: использование sshpass и пароля для SSH
       - name: Deploy to server
         run: |
           sudo apt-get update
