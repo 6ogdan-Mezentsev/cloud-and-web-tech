@@ -1,0 +1,140 @@
+=== Тестирование безопасности kodokan59.ru ===
+Цель: https://kodokan59.ru/
+Время: Tue Sep 23 08:41:33 PM UTC 2025
+
+1. ПРОВЕРКА ДОСТУПНОСТИ:
+HTTP/1.1 200 OK
+Server: nginx/1.18.0 (Ubuntu)
+Date: Tue, 23 Sep 2025 20:41:33 GMT
+Content-Type: text/html; charset=utf-8
+Connection: keep-alive
+Expires: Wed, 17 Aug 2005 00:00:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Pragma: no-cache
+Set-Cookie: 8ece70b56e28786a2a57c3aac024ffe0=dccc3af6d6eae009ce97ca38494caa54; path=/; secure; HttpOnly
+
+----------------------------------------
+
+2. АНАЛИЗ ЗАГОЛОВКОВ БЕЗОПАСНОСТИ:
+Server: nginx/1.18.0 (Ubuntu)
+Content-Type: text/html; charset=utf-8
+----------------------------------------
+
+3. ТЕСТИРОВАНИЕ HTTP МЕТОДОВ:
+GET: Status: 200, Size: 62365
+*** ВОЗМОЖНО УЯЗВИМО: Метод GET возвращает контент!
+<!DOCTYPE html>
+<html lang="ru-ru" dir="ltr">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="/images/system/favicon9696.png" sizes="any">
+POST: Status: 200, Size: 62365
+*** ВОЗМОЖНО УЯЗВИМО: Метод POST возвращает контент!
+<!DOCTYPE html>
+<html lang="ru-ru" dir="ltr">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="/images/system/favicon9696.png" sizes="any">
+PUT: Status: 200, Size: 62365
+*** ВОЗМОЖНО УЯЗВИМО: Метод PUT возвращает контент!
+<!DOCTYPE html>
+<html lang="ru-ru" dir="ltr">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="/images/system/favicon9696.png" sizes="any">
+DELETE: Status: 200, Size: 62365
+*** ВОЗМОЖНО УЯЗВИМО: Метод DELETE возвращает контент!
+<!DOCTYPE html>
+<html lang="ru-ru" dir="ltr">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="/images/system/favicon9696.png" sizes="any">
+PATCH: Status: 200, Size: 62365
+*** ВОЗМОЖНО УЯЗВИМО: Метод PATCH возвращает контент!
+<!DOCTYPE html>
+<html lang="ru-ru" dir="ltr">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="/images/system/favicon9696.png" sizes="any">
+OPTIONS: Status: 200, Size: 62365
+*** ВОЗМОЖНО УЯЗВИМО: Метод OPTIONS возвращает контент!
+<!DOCTYPE html>
+<html lang="ru-ru" dir="ltr">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="/images/system/favicon9696.png" sizes="any">
+HEAD: Status: 200, Size: 0
+TRACE: Status: 405, Size: 166
+CONNECT: Status: 400, Size: 302
+----------------------------------------
+
+4. ТЕСТИРОВАНИЕ PATH TRAVERSAL:
+Тест ../../../etc/passwd: Status: 404, Size: 1411
+Тест ..%2f..%2f..%2fetc%2fpasswd: Status: 400, Size: 166
+Тест ....//....//....//etc//passwd: Status: 404, Size: 1411
+Тест %2e%2e/%2e%2e/%2e%2e/etc/passwd: Status: 400, Size: 166
+Тест ..%252f..%252f..%252fetc%252fpasswd: Status: 404, Size: 1563
+Тест ../../../windows/win.ini: Status: 404, Size: 1545
+Тест ..%2f..%2f..%2fwindows%2fwin.ini: Status: 400, Size: 166
+----------------------------------------
+
+5. ПОИСК СКРЫТЫХ РЕСУРСОВ:
+Проверка .env: Status: 404, Size: 1545
+Проверка .htaccess: Status: 404, Size: 1555
+Проверка .git/config: Status: 404, Size: 1411
+Проверка .DS_Store: Status: 404, Size: 1555
+Проверка config.php: Status: 404, Size: 1545
+Проверка config.json: Status: 404, Size: 1547
+Проверка config.yml: Status: 404, Size: 1545
+Проверка settings.py: Status: 404, Size: 1543
+Проверка backup.sql: Status: 404, Size: 1545
+Проверка backup.zip: Status: 404, Size: 1545
+Проверка backup.tar.gz: Status: 404, Size: 1543
+Проверка debug: Status: 404, Size: 1411
+Проверка test: Status: 404, Size: 1411
+Проверка admin: Status: 404, Size: 1411
+Проверка api: Status: 404, Size: 1411
+Проверка upload: Status: 404, Size: 1411
+Проверка download: Status: 404, Size: 1411
+Проверка index.html: Status: 404, Size: 1411
+Проверка index.php: Status: 404, Size: 1411
+Проверка main.py: Status: 404, Size: 1543
+Проверка app.js: Status: 404, Size: 1543
+Проверка phpinfo.php: Status: 404, Size: 1545
+Проверка info.php: Status: 404, Size: 1545
+Проверка test.php: Status: 404, Size: 1545
+Проверка robots.txt: Status: 404, Size: 1545
+Проверка sitemap.xml: Status: 404, Size: 1545
+Проверка crossdomain.xml: Status: 404, Size: 1545
+----------------------------------------
+
+6. ТЕСТИРОВАНИЕ ПАРАМЕТРОВ:
+Тест ?file=../../etc/passwd: Status: 200
+Тест ?page=../../../etc/passwd: Status: 200
+Тест ?path=....//....//etc/passwd: Status: 200
+Тест ?url=file:///etc/passwd: Status: 200
+Тест ?debug=true: Status: 200
+Тест ?test=1: Status: 200
+Тест ?admin=1: Status: 200
+----------------------------------------
+
+7. ПРОВЕРКА КОРНЕВОЙ ДИРЕКТОРИИ:
+HTTP/1.1 200 OK
+Server: nginx/1.18.0 (Ubuntu)
+Date: Tue, 23 Sep 2025 20:44:10 GMT
+Content-Type: text/html; charset=utf-8
+Connection: keep-alive
+Expires: Wed, 17 Aug 2005 00:00:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Pragma: no-cache
+Set-Cookie: 8ece70b56e28786a2a57c3aac024ffe0=81a9d141c224d012b117fafb1cf0fc01; path=/; secure; HttpOnly
+
+----------------------------------------
+
+8. ПРОВЕРКА SSL СЕРТИФИКАТА:
+subject=CN = kodokan59.ru
+notBefore=Sep  6 23:19:49 2025 GMT
+notAfter=Dec  5 23:19:48 2025 GMT
+----------------------------------------
+
+ТЕСТИРОВАНИЕ ЗАВЕРШЕНО
