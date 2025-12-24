@@ -73,3 +73,10 @@ env:
 
 ## Результат работы CI/CD
 1. Отображаются пайплайны во вкладке Actions
+<img width="2680" height="678" alt="image" src="https://github.com/user-attachments/assets/23122c2c-cfd6-4cdc-a8b5-a0fdedb71a03" />
+2. Отображаются джобы внутри пайплайнов
+<img width="3456" height="2234" alt="image" src="https://github.com/user-attachments/assets/05b4ecae-95bb-489c-99ef-09c398c71b67" />
+3. Корректно работает ручка на удаленном сервере
+<img width="3456" height="2234" alt="image" src="https://github.com/user-attachments/assets/6a984b7c-d285-472d-a6eb-ecf184bad0e1" />
+
+
