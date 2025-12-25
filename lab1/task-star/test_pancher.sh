@@ -1,5 +1,5 @@
 #!/bin/bash
-DOMAIN="kodokan59.ru"
+DOMAIN="puncher.ru"
 BASE_URL="https://$DOMAIN/"
 
 echo "=== Тестирование безопасности $DOMAIN ==="

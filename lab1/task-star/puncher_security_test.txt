@@ -1,5 +1,5 @@
-=== Тестирование безопасности kodokan59.ru ===
-Цель: https://kodokan59.ru/
+=== Тестирование безопасности puncher.ru ===
+Цель: https://puncher.ru
 Время: Tue Sep 23 08:41:33 PM UTC 2025
 
 1. ПРОВЕРКА ДОСТУПНОСТИ:
@@ -132,7 +132,7 @@ Set-Cookie: 8ece70b56e28786a2a57c3aac024ffe0=81a9d141c224d012b117fafb1cf0fc01; p
 ----------------------------------------
 
 8. ПРОВЕРКА SSL СЕРТИФИКАТА:
-subject=CN = kodokan59.ru
+subject=CN = puncher.ru
 notBefore=Sep  6 23:19:49 2025 GMT
 notAfter=Dec  5 23:19:48 2025 GMT
 ----------------------------------------
